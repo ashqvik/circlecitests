@@ -14,7 +14,6 @@ jobs:
     steps:
       - checkout
       - run: echo "second build"
-      - run: sleep 15
 
 workflows:
   version: 2
