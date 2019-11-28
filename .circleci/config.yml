@@ -6,7 +6,11 @@ jobs:
     steps:
       - checkout
       - run: echo "first build"
-      - run: sleep 25
+      - run: mkdir -p my_workspace
+      - run: echo "Trying out workspaces" > my_workspace/echo_output
+      - persist_to_workspace:
+         root: my_workspace
+         path: echo_output
 
   two:
     docker:
@@ -14,10 +18,20 @@ jobs:
     steps:
       - checkout
       - run: echo "second build"
+      - attach_workspace:
+         at: my_workspace
+      - run: |
+         if [[ $(cat my_workspace/echo-output) == "Trying out workspaces" ]]; then
+           echo "It worked!";
+         else
+           echo "Nope!"; exit 1
+         fi
 
 workflows:
   version: 2
   one_and_two:
     jobs:
       - one
-      - two
+      - two:
+         requires:
+          - one
