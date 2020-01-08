@@ -3,11 +3,10 @@ jobs:
   one:
     docker:
       - image: circleci/ruby:2.4.1
+    environment:
+      MY_VAL: some-val
     steps:
       - checkout
-      - run:
-          name: storing val
-          command: MY_VAL=some-val
       - run:
           name: echo val
           command: echo $MY_VAL
