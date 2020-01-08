@@ -6,14 +6,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: echo circle tag
-          command: echo $CIRCLE_TAG
-      - run:
           name: storing val
-          command: CT=${CIRCLE_TAG}
+          command: MY_VAL=some-val
       - run:
           name: echo val
-          command: echo $CT
+          command: echo $MY_VAL
 workflows:
   version: 2
   one:
