@@ -6,6 +6,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: echo circle tag
+          command: echo $CIRCLE_TAG
+      - run:
           name: storing val
           command: CT=${CIRCLE_TAG}
       - run:
